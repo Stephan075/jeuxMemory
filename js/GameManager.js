@@ -30,16 +30,34 @@ var GameManager = function(){
         var  td = _this.time.innerHTML;
         // On Casse la chaine de caractère (en retour on a un array de 2 colonnes [00,00])
         var ts = td.split(':');
-        //
+        //On  incrémente de 1 seconde
         var secondes = parseInt(ts[1])+1;
+        //On récupère les minutes
+        var minutes = parseInt(ts[0])
+
+        //Vérifier si les secondes son à 60 (avec un modulo pour l'exercice de style)
+        if(secondes % 60==0){
+            minutes++;
+            secondes = 0;
+        }
+
+        // On vérifie si le nombre est inférieur à 10
+        if(secondes <10) secondes = "0"+secondes;
+        if(minutes==2) console.log("gameOver");
+
+        // On vérifie si le nombre est inférieur à 10 on ajoute un "0"
+        if(minutes <10) minutes = "0"+minutes;
+        
 
         //Réinjection du resultat dans le DOM
-        _this.time.innerHTML = ts[0] + ":" +secondes;
+        _this.time.innerHTML = minutes + ":" +secondes;
         
     }
 
     // Appel de la méthode.
     this.initTime();
     this.initDisplay();
+
+
 
 };
